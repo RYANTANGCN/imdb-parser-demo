@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ryan.project.imdb.dao.IMDBMapper">
+    <insert id="insertOne" parameterType="com.ryan.project.imdb.model.IMDBItem">
+        INSERT INTO imdb (
+        title_constant,
+        title_type,
+        primary_title,
+        original_title,
+        adult,
+        start_year,
+        end_year,
+        runtime_miniutes,
+        genres
+        )
+        values (
+            #{titleConstant},
+            #{titleType},
+            #{primaryTitle},
+            #{originalTitle},
+            #{adult},
+            #{startYear},
+            #{endYear},
+            #{runtimeMinutes},
+            #{genres}
+        )
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO imdb (
+        title_constant,
+        title_type,
+        primary_title,
+        original_title,
+        adult,
+        start_year,
+        end_year,
+        runtime_miniutes,
+        genres
+        )
+        values 
+        <foreach collection="imdbItems" index="index" item="item" separator=",">
+            (
+            #{item.titleConstant},
+            #{item.titleType},
+            #{item.primaryTitle},
+            #{item.originalTitle},
+            #{item.adult},
+            #{item.startYear},
+            #{item.endYear},
+            #{item.runtimeMinutes},
+            #{item.genres}
+            )
+        </foreach>
+    </insert>
+</mapper>
